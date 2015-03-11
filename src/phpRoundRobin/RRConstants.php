@@ -1,6 +1,6 @@
 <?php
 
-namespace MyRRD;
+namespace phpRoundRobin;
 
 const ARCHIVE_TYPE_INT = 0;
 const ARCHIVE_TYPE_INT32 = ARCHIVE_TYPE_INT;

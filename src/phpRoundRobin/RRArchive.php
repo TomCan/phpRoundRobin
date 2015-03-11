@@ -6,10 +6,10 @@
  * Time: 22:08
  */
 
-namespace MyRRD;
+namespace phpRoundRobin;
 
 
-class MyRRArchive {
+class RRArchive {
 
     private $datasource;
     private $id;
@@ -145,7 +145,7 @@ class MyRRArchive {
 
     public static function Create($datasource, $name, $numberOfSamples, $interval, $aggregationFunction) {
 
-        $archive = new MyRRArchive();
+        $archive = new RRArchive();
         $archive->setDatasource($datasource);
         $archive->setName($name);
         $archive->setNumberOfSamples($numberOfSamples);
@@ -157,7 +157,7 @@ class MyRRArchive {
         // create all samples
         $samples = array();
         for ($i=0;$i < $archive->getNumberOfSamples();$i++) {
-            $samples[$i] = new MyRRSample($archive, $i);
+            $samples[$i] = new RRSample($archive, $i);
         }
         $archive->samples = $samples;
         $archive->changedSamples = $samples;

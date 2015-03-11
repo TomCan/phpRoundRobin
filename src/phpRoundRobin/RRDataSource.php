@@ -6,10 +6,10 @@
  * Time: 22:02
  */
 
-namespace MyRRD;
+namespace phpRoundRobin;
 
 
-class MyRRDataSource {
+class RRDataSource {
 
     private $id = 0;
     private $name = "";
@@ -74,7 +74,7 @@ class MyRRDataSource {
     }
 
     /**
-     * @return MyRRArchive
+     * @return RRArchive
      */
     public function getArchive($name)
     {
@@ -83,7 +83,7 @@ class MyRRDataSource {
 
     public function addArchive($name, $numberOfSamples, $interval, $aggregationFunction) {
 
-        $this->archives[$name] = MyRRArchive::Create($this, $name, $numberOfSamples, $interval, $aggregationFunction);
+        $this->archives[$name] = RRArchive::Create($this, $name, $numberOfSamples, $interval, $aggregationFunction);
         $this->changedArchives[$name] = $this->archives[$name];
 
     }

@@ -6,10 +6,10 @@
  * Time: 0:21
  */
 
-namespace myrrd;
+namespace phpRoundRobin;
 
 
-class MyRRPDOPersistor implements MyRRPersistor {
+class RRPDOBackend implements RRBackend {
 
     private $dbh;
     private $connectionParameters;
@@ -25,7 +25,7 @@ class MyRRPDOPersistor implements MyRRPersistor {
         $this->connectionParameters = $connectionParameters;
     }
 
-    public function persistDatasource(MyRRDataSource $dataSource)
+    public function persistDatasource(RRDataSource $dataSource)
     {
 
         if ($dataSource->getId() == 0) {
@@ -45,7 +45,7 @@ class MyRRPDOPersistor implements MyRRPersistor {
 
 
 
-    public function persistArchive(MyRRArchive $archive)
+    public function persistArchive(RRArchive $archive)
     {
 
         if ($archive->getId() == 0) {
@@ -64,7 +64,7 @@ class MyRRPDOPersistor implements MyRRPersistor {
 
 
 
-    public function persistSample(MyRRSample $sample)
+    public function persistSample(RRSample $sample)
     {
 
         if ($sample->getId() == 0) {

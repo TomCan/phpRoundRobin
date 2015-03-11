@@ -6,10 +6,10 @@
  * Time: 22:11
  */
 
-namespace MyRRD;
+namespace phpRoundRobin;
 
 
-class MyRRSample {
+class RRSample {
 
     private $id;
     private $index;
