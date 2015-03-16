@@ -89,7 +89,7 @@ class RRSample {
     {
         if ($this->numberOfSamples !== $numberOfSamples) {
             $this->numberOfSamples = $numberOfSamples;
-            $this->archive->markChanged($this->getId());
+            $this->archive->markChanged($this);
         }
     }
 
