@@ -12,7 +12,7 @@ namespace phpRoundRobin;
 class RRArchive {
 
     private $datasource;
-    private $id;
+    private $id = 0;
     private $name;
     private $numberOfSamples;
     private $interval;
