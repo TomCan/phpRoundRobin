@@ -114,7 +114,7 @@ class RRSample {
 
     public function Save() {
         // save the sample
-        $this->archive->getDatasource()->getPersistor()->persistSample($this);
+        $this->archive->getDatasource()->getBackend()->persistSample($this);
 
     }
 

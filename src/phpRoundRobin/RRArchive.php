@@ -283,7 +283,7 @@ class RRArchive {
 
         if ($this->id == 0) {
             // need to save this
-            $this->datasource->getPersistor()->persistArchive($this);
+            $this->datasource->getBackend()->persistArchive($this);
         }
 
         foreach ($this->changedSamples as $sample) {

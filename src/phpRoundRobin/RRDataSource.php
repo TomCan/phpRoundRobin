@@ -18,11 +18,19 @@ class RRDataSource {
 
     private $changedArchives = array();
 
-    private $persistor;
+    private $backend;
 
-    function __construct($persistor)
+    function __construct($backend)
     {
-        $this->persistor = $persistor;
+        $this->backend = $backend;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBackend()
+    {
+        return $this->backend;
     }
 
     /**
@@ -111,7 +119,7 @@ class RRDataSource {
 
         if ($this->id == 0) {
             // new datasource
-            $this->persistor->persistDatasource($this);
+            $this->backend->persistDatasource($this);
         }
 
         foreach ($this->changedArchives as $archive) {
