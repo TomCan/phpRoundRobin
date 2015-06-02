@@ -16,4 +16,10 @@ interface RRBackend {
     public function persistArchive(RRArchive $archive);
     public function persistSample(RRSample $sample);
 
+    public function loadArchive(RRDataSource $dataSource, $name);
+    public function loadArchives(RRDataSource $datasource);
+
+    public function loadSample(RRArchive $archive, $index);
+    public function loadSamples(RRArchive $archive);
+
 }
