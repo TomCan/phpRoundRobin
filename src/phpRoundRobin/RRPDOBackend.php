@@ -184,9 +184,9 @@ class RRPDOBackend implements RRBackend {
 
     }
 
-    public function loadArchive(RRDataSource $datasource, $name)
+    public function loadArchive(RRDataSource $datasource, $name, $lazy = false)
     {
-        $stm = $this->dbh->query("SELECT * FROM `archives` WHERE `name` = '".$this->dbh->quote($name)."'");
+        $stm = $this->dbh->query("SELECT * FROM `archives` WHERE `name` = ".$this->dbh->quote($name));
         $archive = null;
         if ($row = $stm->fetch()) {
             $archive = new RRArchive();
@@ -198,12 +198,13 @@ class RRPDOBackend implements RRBackend {
             $archive->setInterval($row['interval']);
             $archive->setLastTimestamp($row['lasttimestamp']);
             $archive->setLastIndex($row['lastindex']);
+            if (!$lazy) $this->loadSamples($archive);
         }
         $stm->close();
         return $archive;
     }
 
-    public function loadArchives(RRDataSource $datasource)
+    public function loadArchives(RRDataSource $datasource, $lazy = false)
     {
         $stm = $this->dbh->query("SELECT * FROM `archives`");
         $archives = array();
@@ -217,37 +218,36 @@ class RRPDOBackend implements RRBackend {
             $archive->setInterval($row['interval']);
             $archive->setLastTimestamp($row['lasttimestamp']);
             $archive->setLastIndex($row['lastindex']);
+            if (!$lazy) $this->loadSamples($archive);
+            $archives[] = $archive;
         }
-        $stm->close();
         return $archives;
     }
 
     public function loadSample(RRArchive $archive, $index)
     {
-        $stm = $this->dbh->query("SELECT * FROM `samples` WHERE `archive` = '".$this->dbh->quote($archive->getId())."' AND `index` = '".$this->dbh->quote($index)."'");
+        $stm = $this->dbh->query("SELECT * FROM `samples` WHERE `archive` = ".$this->dbh->quote($archive->getId())." AND `index` = ".$this->dbh->quote($index));
         $sample = null;
         if ($row = $stm->fetch()) {
-            $sample = new RRSample($row['archive'], $row['index']);
+            $sample = new RRSample($archive, $row['index']);
             $sample->setId($row['id']);
             $sample->setNumberOfSamples($row['numberofsamples']);
             $sample->setValue($row['value']);
         }
-        $stm->close();
         return $sample;
     }
 
     public function loadSamples(RRArchive $archive)
     {
-        $stm = $this->dbh->query("SELECT * FROM `samples` WHERE `archive` = '".$this->dbh->quote($archive->getId())."' ORDER BY `index`");
+        $stm = $this->dbh->query("SELECT * FROM `samples` WHERE `archive` = ".$this->dbh->quote($archive->getId())." ORDER BY `index`");
         $samples = array();
         while ($row = $stm->fetch()) {
-            $sample = new RRSample($row['archive'], $row['index']);
+            $sample = new RRSample($archive, $row['index']);
             $sample->setId($row['id']);
             $sample->setNumberOfSamples($row['numberofsamples']);
             $sample->setValue($row['value']);
             $samples[] = $sample;
         }
-        $stm->close();
         return $samples;
     }
 

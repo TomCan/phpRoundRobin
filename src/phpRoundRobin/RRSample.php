@@ -17,7 +17,7 @@ class RRSample {
     private $numberOfSamples;
     private $value;
 
-    function __construct($archive, $index)
+    function __construct(RRArchive $archive, $index)
     {
         $this->archive = $archive;
         $this->index = $index;

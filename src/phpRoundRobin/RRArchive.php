@@ -272,7 +272,7 @@ class RRArchive {
 
     }
 
-    public function markChanged($sample) {
+    public function markChanged(RRSample $sample) {
         // keep track of changed samples, for persisting purposes
         $this->changedSamples[$sample->getId()] = $sample;
         // let datasource know we changed

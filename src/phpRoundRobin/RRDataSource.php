@@ -131,7 +131,7 @@ class RRDataSource {
 
     public function Load() {
         // load archives from backend
-        $this->archives = $this->backend->loadArchives();
+        $this->archives = $this->backend->loadArchives($this);
     }
 
 }
